@@ -1,0 +1,34 @@
+{
+  "1": {
+    "id": "1",
+    "name": "Dan",
+    "type": "nationalId",
+    "meta": {
+      "number":"12345",
+      "valid":"true",
+      "doctype": "passport",
+      "birthdate":"2020-01-02",
+      "email":"dan@dan.com"
+    }
+  },
+  "2": {
+    "id": "2",
+    "name": "Lee",
+    "type": "nationalId",
+    "meta": {
+      "number":"987654",
+      "valid":"true",
+      "doctype": "national certificate"
+    }
+  },
+  "3": {
+    "id": "3",
+    "name": "Nick",
+    "type": "nationalId",
+    "meta": {
+      "number":"456",
+      "valid":"true",
+      "doctype": "driver card"
+    }
+  }
+}
