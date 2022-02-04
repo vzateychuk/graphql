@@ -1,5 +1,5 @@
-{
-  "1": {
+[
+  {
     "id": "1",
     "name": "Dan",
     "type": "nationalId",
@@ -11,9 +11,9 @@
       "email":"dan@dan.com"
     }
   },
-  "2": {
+  {
     "id": "2",
-    "name": "Lee",
+    "name": "Dan",
     "type": "nationalId",
     "meta": {
       "number":"987654",
@@ -21,7 +21,7 @@
       "doctype": "national certificate"
     }
   },
-  "3": {
+  {
     "id": "3",
     "name": "Nick",
     "type": "nationalId",
@@ -31,4 +31,4 @@
       "doctype": "driver card"
     }
   }
-}
+]

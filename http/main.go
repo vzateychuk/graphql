@@ -10,27 +10,21 @@ import (
 )
 
 func main() {
-	err := meta.InitMetaStore("./meta/data.json")
+	err := meta.ImportJsonFileAndInitSchema("./meta/data.json")
 	if err != nil {
-		log.Fatalln("InitMetaStore", err)
+		log.Fatalln("ImportJsonFileAndInitSchema", err)
 	}
 
 	http.HandleFunc("/meta", func(w http.ResponseWriter, r *http.Request) {
-		result := executeQuery(r.URL.Query().Get("query"), schema)
+		result := executeQuery(r.URL.Query().Get("query"), meta.MetaSchema)
 		json.NewEncoder(w).Encode(result)
 	})
 
 	fmt.Println("Now server is running on port 8080")
-	fmt.Println("Test with Get: curl -g 'http://localhost:8080/meta?query={Metadata(id:\"1\"){id, name, type}}'")
+	fmt.Println("Test with Get: curl -g 'http://localhost:8080/meta?query={Metadata(name:\"Dan\"){id,type}}'")
 	http.ListenAndServe(":8080", nil)
 
 }
-
-var schema, _ = graphql.NewSchema(
-	graphql.SchemaConfig{
-		Query: meta.QueryType,
-	},
-)
 
 func executeQuery(query string, schema graphql.Schema) *graphql.Result {
 
