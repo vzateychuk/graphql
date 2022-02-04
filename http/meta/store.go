@@ -52,11 +52,23 @@ func ImportJsonFileAndInitSchema(fileName string) error {
 		graphql.ObjectConfig{
 			Name: "Query",
 			Fields: graphql.Fields{
-				"meta": &graphql.Field{
-					Type: metaType,
-					Args: args,
+
+				// curl -g http://localhost:8080/meta?query={one(id:"1"){id, name, type}}
+				"one": &graphql.Field{
+					Type:        metaType,
+					Description: "FindOne meta by criteria",
+					Args:        args,
 					Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 						return filterMeta(data, p.Args), nil
+					},
+				},
+
+				// curl -g 'http://localhost:8080/meta?query={list{id,name,type}}'
+				"list": &graphql.Field{
+					Type:        graphql.NewList(metaType),
+					Description: "List of metas",
+					Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+						return data, nil
 					},
 				},
 			},

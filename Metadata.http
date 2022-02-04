@@ -1,5 +1,5 @@
 ### Get Metadata by ID
-GET http://localhost:8080/meta?query={meta(id:"1"){id, name, type}}
+GET http://localhost:8080/meta?query={one(id:"1"){id, name, type}}
 
 ### Get Meta by name
-GET http://localhost:8080/meta?query={meta(name:"Dan"){id, name, meta}}
+GET http://localhost:8080/meta?query={list{id,name,type}}
