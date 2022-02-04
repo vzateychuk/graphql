@@ -1,0 +1,2 @@
+### Get Metadata by ID=1
+GET http://localhost:8080/meta?query={Metadata(id:"1"){id, name, type}}
