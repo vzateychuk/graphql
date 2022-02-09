@@ -2,6 +2,8 @@ package meta
 
 import "github.com/graphql-go/graphql"
 
+type Thing map[string]interface{}
+
 /*
    Create Query object type with fields "meta" has type [metaType] by using GraphQLObjectTypeConfig:
        - Name: name of object type ("Metadata")
