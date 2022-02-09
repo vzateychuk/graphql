@@ -1,9 +1,10 @@
 [
   {
     "id": "1",
-    "name": "Dan",
     "type": "nationalId",
     "meta": {
+      "name": "Dan",
+      "custom1": "custom-1-value",
       "number":"12345",
       "valid":"true",
       "doctype": "passport",
@@ -13,19 +14,20 @@
   },
   {
     "id": "2",
-    "name": "Leia",
     "type": "nationalId",
     "meta": {
+      "name": "Leia",
       "number":"987654",
       "valid":"true",
-      "doctype": "national certificate"
+      "doctype": "national certificate",
+      "custom2": "custom-2-value"
     }
   },
   {
     "id": "3",
-    "name": "Nick",
     "type": "nationalId",
     "meta": {
+      "name": "Nick",
       "number":"456",
       "valid":"true",
       "doctype": "driver card"

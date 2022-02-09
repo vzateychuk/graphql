@@ -7,6 +7,8 @@ import (
 	"io/ioutil"
 )
 
+type Thing map[string]interface{}
+
 // Shared data variables to allow dynamic reloads
 var MetaSchema graphql.Schema
 
@@ -28,13 +30,26 @@ func ImportJsonFileAndInitSchema(fileName string) error {
 	// getting fields and values of the Data collection
 	fields := make(graphql.Fields)
 	args := make(graphql.FieldConfigArgument)
+
 	for _, item := range data {
 		for k := range item {
-			fields[k] = &graphql.Field{
-				Type: graphql.String,
-			}
-			args[k] = &graphql.ArgumentConfig{
-				Type: graphql.String,
+			if k != "meta" {
+				fields[k] = &graphql.Field{
+					Type: graphql.String,
+				}
+				args[k] = &graphql.ArgumentConfig{
+					Type: graphql.String,
+				}
+			} else {
+				for m := range item[k].(map[string]interface{}) {
+					fmt.Println(m)
+					fields[m] = &graphql.Field{
+						Type: graphql.String,
+					}
+					args[m] = &graphql.ArgumentConfig{
+						Type: graphql.String,
+					}
+				}
 			}
 		}
 	}
@@ -42,7 +57,7 @@ func ImportJsonFileAndInitSchema(fileName string) error {
 	// Declare metaType object type with dynamic list of fields
 	var metaType = graphql.NewObject(
 		graphql.ObjectConfig{
-			Name:   "Meta",
+			Name:   "Metadata",
 			Fields: fields,
 		},
 	)

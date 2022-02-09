@@ -21,7 +21,7 @@ func main() {
 	})
 
 	fmt.Println("Now server is running on port 8080")
-	fmt.Println("Test with Get: curl -g 'http://localhost:8080/meta?query={Metadata(name:\"Dan\"){id,type}}'")
+	fmt.Println("Test with Get: curl -g 'http://localhost:8080/meta?query={one(name:%22Dan%22){id,name,type}}'")
 	http.ListenAndServe(":8080", nil)
 
 }
