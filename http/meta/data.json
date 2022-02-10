@@ -2,8 +2,8 @@
   {
     "id": "1",
     "type": "nationalId",
+    "name": "Dan",
     "meta": {
-      "name": "Dan",
       "custom1": "custom-1-value",
       "number":"12345",
       "valid":"true",
@@ -15,8 +15,8 @@
   {
     "id": "2",
     "type": "nationalId",
+    "name": "Leia",
     "meta": {
-      "name": "Leia",
       "number":"987654",
       "valid":"true",
       "doctype": "national certificate",
@@ -26,8 +26,8 @@
   {
     "id": "3",
     "type": "nationalId",
+    "name": "Nick",
     "meta": {
-      "name": "Nick",
       "number":"456",
       "valid":"true",
       "doctype": "driver card"

@@ -1,5 +1,5 @@
 ### Get Metadata by ID
-GET http://localhost:8080/meta?query={one(id:"1"){id, name, type}}
+GET http://localhost:8080/meta?query={findOne(id:"1"){id, name, type}}
 
-### Get Meta by name
-GET http://localhost:8080/meta?query={list{id,name,type}}
+### Filter by Meta value
+GET http://localhost:8080/meta?query={filter(doctype:"driver card"){id,name,type}}

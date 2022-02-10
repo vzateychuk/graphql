@@ -68,22 +68,32 @@ func ImportJsonFileAndInitSchema(fileName string) error {
 			Name: "Query",
 			Fields: graphql.Fields{
 
-				// curl -g http://localhost:8080/meta?query={one(id:"1"){id, name, type}}
-				"one": &graphql.Field{
+				// curl -g http://localhost:8080/meta?query={findOne(id:"1"){id, name, type}}
+				"findOne": &graphql.Field{
 					Type:        metaType,
 					Description: "FindOne meta by criteria",
 					Args:        args,
 					Resolve: func(p graphql.ResolveParams) (interface{}, error) {
-						return filterMeta(data, p.Args), nil
+						return findOne(data, p.Args), nil
 					},
 				},
 
-				// curl -g 'http://localhost:8080/meta?query={list{id,name,type}}'
-				"list": &graphql.Field{
+				// curl -g 'http://localhost:8080/meta?query={all{id,name,type}}'
+				"all": &graphql.Field{
 					Type:        graphql.NewList(metaType),
 					Description: "List of metas",
 					Resolve: func(p graphql.ResolveParams) (interface{}, error) {
 						return data, nil
+					},
+				},
+
+				// curl -g 'http://localhost:8080/meta?query={filter(doctype:"driver card"){id,name,type}}'
+				"filter": &graphql.Field{
+					Type:        graphql.NewList(metaType),
+					Description: "Data filtered by meta fields",
+					Args:        args,
+					Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+						return filterMeta(data, p.Args), nil
 					},
 				},
 			},
@@ -99,10 +109,25 @@ func ImportJsonFileAndInitSchema(fileName string) error {
 	return nil
 }
 
+func filterMeta(data []map[string]interface{}, filters map[string]interface{}) interface{} {
+
+	// log.Println(fmt.Sprintf("idx: %v, arg: %v", idx, arg))
+	var result []map[string]interface{}
+
+	// filter where field or meta.field equals to value
+	for _, item := range data {
+		for idx, filter := range filters {
+			mta := item["meta"].(map[string]interface{})
+			if mta[idx] == filter || item[idx] == filter {
+				result = append(result, item)
+			}
+		}
+	}
+	return result
+}
+
 // filter metadata by args
-func filterMeta(data []map[string]interface{},
-	args map[string]interface{},
-) map[string]interface{} {
+func findOne(data []map[string]interface{}, args map[string]interface{}) map[string]interface{} {
 
 	for _, item := range data {
 		for idx, arg := range args {
